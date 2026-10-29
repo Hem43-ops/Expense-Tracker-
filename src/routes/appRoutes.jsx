@@ -3,7 +3,7 @@ import Mainlayout from "../layouts/main-layout";
 import Home from "../pages/home";
 import Login from "../pages/Login";
 import About from "../pages/About";
-
+import Dashboard from "../pages/Dashboard";
 const appRoutes = [
     {
         path: "/",
@@ -16,6 +16,10 @@ const appRoutes = [
             {
                 path: "about",
                 element: <About />
+            },
+            {
+                path:"dashboard",
+                element:<Dashboard />
             }
         ]
     },
