@@ -9,42 +9,42 @@ function AddTransaction() {
     const [amount, setAmount] = useState("");
     const [type, setType] = useState("Expense");
     const [category, setCategory] = useState("Food");
-    const { transactions, setTransactions, deleteTransaction,updateTransaction } = useTransactions();
+    const { transactions, setTransactions, deleteTransaction, updateTransaction } = useTransactions();
     const [editingId, setEditingId] = useState(null);
 
-    
-function handleSubmit(e) {
-    e.preventDefault();
 
-    const transactionData = {
-        id: editingId ?? Date.now(),
-        description,
-        amount: Number(amount),
-        type,
-        category
-    };
+    function handleSubmit(e) {
+        e.preventDefault();
 
-    if (editingId !== null) {
-        updateTransaction(transactionData);
-        setEditingId(null);
-    } else {
-        setTransactions((prev) => [...prev, transactionData]);
+        const transactionData = {
+            id: editingId ?? Date.now(),
+            description,
+            amount: Number(amount),
+            type,
+            category
+        };
+
+        if (editingId !== null) {
+            updateTransaction(transactionData);
+            setEditingId(null);
+        } else {
+            setTransactions((prev) => [...prev, transactionData]);
+        }
+
+        setDescription("");
+        setAmount("");
+        setType("Expense");
+        setCategory("Food");
     }
 
-    setDescription("");
-    setAmount("");
-    setType("Expense");
-    setCategory("Food");
-}
 
-
-function handleEdit(item) {
-    setEditingId(item.id);
-    setDescription(item.description);
-    setAmount(String(item.amount));
-    setType(item.type);
-    setCategory(item.category);
-}
+    function handleEdit(item) {
+        setEditingId(item.id);
+        setDescription(item.description);
+        setAmount(String(item.amount));
+        setType(item.type);
+        setCategory(item.category);
+    }
 
 
     return (
@@ -88,10 +88,10 @@ function handleEdit(item) {
                                             type="button"
                                             onClick={() => setType(item)}
                                             className={`rounded-xl border px-4 py-3 font-semibold transition ${type === item
-                                                    ? item === "Income"
-                                                        ? "border-emerald-500 bg-emerald-50 text-emerald-700"
-                                                        : "border-rose-500 bg-rose-50 text-rose-700"
-                                                    : "border-gray-200 bg-white text-gray-600 hover:bg-gray-50"
+                                                ? item === "Income"
+                                                    ? "border-emerald-500 bg-emerald-50 text-emerald-700"
+                                                    : "border-rose-500 bg-rose-50 text-rose-700"
+                                                : "border-gray-200 bg-white text-gray-600 hover:bg-gray-50"
                                                 }`}
                                         >
                                             {item === "Income" ? "↗ " : "↘ "}
@@ -148,7 +148,7 @@ function handleEdit(item) {
                                 type="submit"
                                 className="w-full"
                             >
-                                + Save Transaction
+                                {editingId !== null ? "Update Transaction" : "+ Save Transaction"}
                             </Button>
                         </form>
                     </section>
@@ -199,8 +199,8 @@ function handleEdit(item) {
 
                                         <div className="flex shrink-0 flex-col items-end gap-2">
                                             <p className={`font-bold ${item.type === "Income"
-                                                    ? "text-emerald-600"
-                                                    : "text-rose-600"
+                                                ? "text-emerald-600"
+                                                : "text-rose-600"
                                                 }`}>
                                                 {item.type === "Income" ? "+" : "-"}
                                                 ₹{Number(item.amount).toLocaleString("en-IN")}
@@ -213,6 +213,15 @@ function handleEdit(item) {
                                             >
                                                 Delete
                                             </button>
+
+                                            <button
+                                                type="button"
+                                                onClick={() => handleEdit(item)}
+                                                className="rounded-lg bg-blue-50 px-3 py-1.5 text-xs font-semibold text-blue-600 hover:bg-blue-100"
+                                            >
+                                                Edit
+                                            </button>
+
                                         </div>
                                     </div>
 
