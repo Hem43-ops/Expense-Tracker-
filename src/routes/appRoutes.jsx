@@ -4,6 +4,8 @@ import Home from "../pages/home";
 import Login from "../pages/Login";
 import About from "../pages/About";
 import Dashboard from "../pages/Dashboard";
+import AddTransaction from "../pages/AddTransaction";
+
 const appRoutes = [
     {
         path: "/",
@@ -20,6 +22,10 @@ const appRoutes = [
             {
                 path:"dashboard",
                 element:<Dashboard />
+            },
+            {
+            path: "add-transaction",
+            element: <AddTransaction />
             }
         ]
     },

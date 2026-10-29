@@ -1,31 +1,57 @@
-import React from 'react'
 
-function input({
-    type="text",
+function Input({
+    type = "text",
     label,
     placeholder,
     name,
     value,
-    onchange,
-    required=false
+    onChange,
+    required = false,
+    error,
+    className = ""
 }) {
-  return (
-    <div className='flex flex-col gap-2'>
-        <label htmlfor={name} className="text-sm font-median">
-            {label}
-        </label>
-        <input
-        id={name}
-        name={name}
-        placeholder={placeholder}
-        value={value}
-        onChange={onchange}
-        required={required}
-        className="w-full rounded-lg border border-gray=300 px-4 py-3 outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-100"
-        />
-        
-    </div>
-  );
+    return (
+        <div className="flex w-full flex-col gap-2">
+            {label && (
+                <label
+                    htmlFor={name}
+                    className="text-sm font-semibold text-gray-700"
+                >
+                    {label}
+                    {required && (
+                        <span className="ml-1 text-red-500">*</span>
+                    )}
+                </label>
+            )}
+
+            <input
+                id={name}
+                name={name}
+                type={type}
+                placeholder={placeholder}
+                value={value}
+                onChange={onChange}
+                required={required}
+                aria-invalid={Boolean(error)}
+                aria-describedby={error ? `${name}-error` : undefined}
+                className={`w-full rounded-xl border bg-white px-4 py-3 text-gray-900 outline-none transition placeholder:text-gray-400 focus:ring-4 ${
+                    error
+                        ? "border-red-400 focus:border-red-500 focus:ring-red-100"
+                        : "border-gray-200 focus:border-blue-500 focus:ring-blue-100"
+                } ${className}`}
+            />
+
+            {error && (
+                <p
+                    id={`${name}-error`}
+                    className="text-sm text-red-600"
+                    role="alert"
+                >
+                    {error}
+                </p>
+            )}
+        </div>
+    );
 }
 
-export default input;
+export default Input;

@@ -13,22 +13,25 @@ function Dashboard() {
 
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 <SummaryCard
-                    title="Total Balance"
-                    amount="₹24,500"
-                    description="Your available balance"
-                />
+    title="Total Balance"
+    amount="₹24,500"
+    description="Your current balance"
+    type="default"
+/>
 
-                <SummaryCard
-                    title="Total Income"
-                    amount="₹35,000"
-                    description="Money received"
-                />
+<SummaryCard
+    title="Total Income"
+    amount="₹35,000"
+    description="Money received"
+    type="income"
+/>
 
-                <SummaryCard
-                    title="Total Expenses"
-                    amount="₹10,500"
-                    description="Money spent"
-                />
+<SummaryCard
+    title="Total Expenses"
+    amount="₹10,500"
+    description="Money spent"
+    type="expense"
+/>
             </div>
         </div>
     );

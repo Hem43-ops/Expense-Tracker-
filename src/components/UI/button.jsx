@@ -2,13 +2,26 @@
 function Button({
     children,
     type = "button",
-    disabled = false
+    disabled = false,
+    variant = "primary",
+    className = "",
+    onClick
 }) {
+    const baseStyles =
+        "rounded-xl px-5 py-3 font-semibold transition duration-200 disabled:cursor-not-allowed disabled:opacity-50";
+
+    const variants = {
+        primary: "bg-blue-600 text-white hover:bg-blue-700",
+        secondary: "border border-gray-200 bg-white text-gray-700 hover:bg-gray-50",
+        danger: "bg-red-600 text-white hover:bg-red-700"
+    };
+
     return (
         <button
             type={type}
             disabled={disabled}
-            className="w-full rounded-lg bg-blue-600 px-4 py-3 font-semibold text-white transition hover:bg-blue-700 disabled:opacity-50"
+            onClick={onClick}
+            className={`${baseStyles} ${variants[variant] || variants.primary} ${className}`}
         >
             {children}
         </button>
